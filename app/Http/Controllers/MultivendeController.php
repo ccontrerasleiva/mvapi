@@ -40,14 +40,15 @@ class MultivendeController extends Controller
     }
 
     public function postRequest(Request $r){
-        $input = $r->all();
+        $input = $r->getContent();
+        //print_r($input);
         //$params = http_build_query($input);
         $url = $this->url.$r->path();
         //echo $url;
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $input);
 
         $headers = array();
         $headers[] = 'Authorization: Bearer '.$this->token;

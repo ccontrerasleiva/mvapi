@@ -13,6 +13,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+         \App\Models\User::factory()->create();
+         $user = \App\Models\User::find(1);
+         $token = $user->createToken('dorel-token')->plainTextToken;
+         echo "El token del usuario es: ".explode('|', $token)[1];
     }
 }
