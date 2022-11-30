@@ -62,4 +62,29 @@ class MultivendeController extends Controller
         return response($result)->header('Content-Type','application/json');
         //return response($r->path());*/
     }
+
+    public function putRequest(Request $r){
+        $input = $r->getContent();
+        $url = $this->url.$r->path();
+        //echo $url;
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PUT');
+
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $input);
+
+        $headers = array();
+        $headers[] = 'Authorization: Bearer '.$this->token;
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
+        $result = curl_exec($ch);   
+        if (curl_errno($ch)) {
+            echo 'Error:' . curl_error($ch);
+        }
+        curl_close($ch);
+        return response($result)->header('Content-Type','application/json');
+        //return response($r->path());*/
+    }
+
 }
