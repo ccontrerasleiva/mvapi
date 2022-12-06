@@ -17,7 +17,7 @@ use App\Http\Controllers\MultivendeController;
 
 Route::middleware('auth:sanctum')->group(function() {
     Route::get('/{any}', [MultivendeController::class, 'getRequest'])->where('any', '.*');
-    Route::post('/{any}', [MultivendeController::class, 'postRequest'])->where('any', '.*');
+    Route::post('/{any}',[MultivendeController::class, 'postRequest'])->where('any', '.*');
     Route::put('/{any}', [MultivendeController::class, 'putRequest'])->where('any', '.*');
 });
 
